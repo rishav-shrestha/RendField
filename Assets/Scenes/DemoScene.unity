@@ -1304,7 +1304,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8773054024654529741, guid: ffad5fbd1507a4546b53510adbdce6c6, type: 3}
+  m_Sprite: {fileID: -6033971389979972135, guid: 9913dc81ed8e097439a736f363cae5d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1433,7 +1433,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2101505338786817762, guid: 4edf10bbaa41f8940928d55d03af8bf9, type: 3}
+  m_Sprite: {fileID: 5077686826091241858, guid: 9af9dc0c9f91109409673d175d2644c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1453,7 +1453,7 @@ Transform:
   m_GameObject: {fileID: 1808773061}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.448, y: -0.029, z: 0}
+  m_LocalPosition: {x: 0.97, y: 3.02, z: 0}
   m_LocalScale: {x: 1.8034, y: 1.9349, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1495,6 +1495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  sprintMultiplier: 2
   jumpforce: 5
   playerUpperBody: {fileID: 1808773061}
   playerLowerBody: {fileID: 738895889}

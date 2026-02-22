@@ -2,6 +2,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {   
     public float speed = 2.0f;
+    public float sprintMultiplier = 2.0f;
     public float jumpforce = 5.0f;
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //circle positions
         pos[0] = new Vector2(
             col.bounds.min.x+groundCheckRadius+0.03f,
             col.bounds.min.y
@@ -44,16 +46,35 @@ public class PlayerMovement : MonoBehaviour
         //walking
         horizontalInput = Input.GetAxisRaw("Horizontal");
         forwardInput = Input.GetAxisRaw("Vertical");
+        
+        // Check if Shift is held for sprinting
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        float currentSpeed = isSprinting ? speed * sprintMultiplier : speed;
         if (horizontalInput == 0)
         {
             playerUpperBody.GetComponent<Animator>().SetBool("walking",false);
             playerLowerBody.GetComponent<Animator>().SetBool("walking",false);
+            playerUpperBody.GetComponent<Animator>().SetBool("running",false);
+            playerLowerBody.GetComponent<Animator>().SetBool("running",false);
         }
         if (horizontalInput > 0)
         {
-            playerUpperBody.GetComponent<Animator>().SetBool("walking",true);
-            playerLowerBody.GetComponent<Animator>().SetBool("walking",true);
-            gameObject.transform.Translate(Vector3.right * Time.deltaTime * speed);
+          
+            if (isSprinting)
+            {
+                playerUpperBody.GetComponent<Animator>().SetBool("walking",false);
+                playerLowerBody.GetComponent<Animator>().SetBool("walking",false);
+                playerUpperBody.GetComponent<Animator>().SetBool("running",true);
+                playerLowerBody.GetComponent<Animator>().SetBool("running",true);
+            }
+            else
+            {
+                playerUpperBody.GetComponent<Animator>().SetBool("walking",true);
+                playerLowerBody.GetComponent<Animator>().SetBool("walking",true);
+                playerUpperBody.GetComponent<Animator>().SetBool("running",false);
+                playerLowerBody.GetComponent<Animator>().SetBool("running",false);
+            }
+            gameObject.transform.Translate(Vector3.right * Time.deltaTime * currentSpeed);
             if (lookingRight)
             {
                 transform.localScale = transform.localScale* new Vector2(-1,1);
@@ -62,9 +83,21 @@ public class PlayerMovement : MonoBehaviour
         }
         if(horizontalInput < 0)
         {
-            playerUpperBody.GetComponent<Animator>().SetBool("walking",true);
-            playerLowerBody.GetComponent<Animator>().SetBool("walking",true);
-            gameObject.transform.Translate(Vector3.left * Time.deltaTime * speed);
+            if (isSprinting)
+            {
+                playerUpperBody.GetComponent<Animator>().SetBool("walking",false);
+                playerLowerBody.GetComponent<Animator>().SetBool("walking",false);
+                playerUpperBody.GetComponent<Animator>().SetBool("running",true);
+                playerLowerBody.GetComponent<Animator>().SetBool("running",true);
+            }
+            else
+            {
+                playerUpperBody.GetComponent<Animator>().SetBool("walking",true);
+                playerLowerBody.GetComponent<Animator>().SetBool("walking",true);
+                playerUpperBody.GetComponent<Animator>().SetBool("running",false);
+                playerLowerBody.GetComponent<Animator>().SetBool("running",false);
+            }
+            gameObject.transform.Translate(Vector3.left * Time.deltaTime * currentSpeed);
             if (!lookingRight)
             {
                 transform.localScale = transform.localScale* new Vector2(-1,1);
@@ -89,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
               
         }
     }
+    //Circles to check if the player is on ground
     void CheckGround()
     {
         RaycastHit2D[] hit =
@@ -122,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
         }
       
     }
+    //visualizer
     void OnDrawGizmosSelected()
     {
         
