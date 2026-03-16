@@ -13,22 +13,26 @@ public class PlayerJumpState : PlayerState
             {
                 _player.controller.Jump(); 
             }
+            Debug.Log("Jump");
         }
 
         public override void Update()
         {
-            Debug.Log("Jump");
-            if (_player.sensor.isGrounded)
+            if (_player.controller.Rb.linearVelocity.y < 0)
             {
-                _player.stateMachine.ChangeState(new PlayerIdleState(_player));
+                _player.stateMachine.ChangeState(new PlayerFallState(_player));
             }
             if(_player.input.SprintPressed && _player.input.HorizontalInput != 0 
-                                           && !_player.sensor.isTouchingWallLeft
-                                           && !_player.sensor.isTouchingWallRight)
+                                           && !_player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerSprintJumpState(_player));
             }
-            _player.controller.Move(_player.input.HorizontalInput,false);
+
+            if (!_player.sensor.isTouchingWall)
+            {
+                _player.controller.Move(_player.input.HorizontalInput,false);  
+            }
+            
         }
         
 

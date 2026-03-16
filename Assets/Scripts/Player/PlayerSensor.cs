@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,8 +11,7 @@ public class PlayerSensor : MonoBehaviour
     [Header("Wall Sensor")]
     public LayerMask wallLayer;
     public float wallCheckRadius=0.1f;
-    public Transform[] wallCheckLeft;
-    public Transform[] wallCheckRight;
+    public Transform[] wallCheck;
     
     [Header("Debug Options")]
     public bool showGizmos;
@@ -21,8 +19,7 @@ public class PlayerSensor : MonoBehaviour
     public bool showGroundGizmos;
 
     public bool isGrounded;
-    public bool isTouchingWallLeft;
-    public bool isTouchingWallRight;
+    public bool isTouchingWall;
 
     
     void Update()
@@ -46,24 +43,16 @@ public class PlayerSensor : MonoBehaviour
 
     private void UpdateWallChecks()
     {
-        for(int i=0; i<wallCheckLeft.Length; i++)
+     
+        for (int i = 0; i < wallCheck.Length; i++)
         {
-            if(Physics2D.OverlapCircle(wallCheckLeft[i].position, wallCheckRadius, wallLayer))
+            if (Physics2D.OverlapCircle(wallCheck[i].position, wallCheckRadius, wallLayer))
             {
-                isTouchingWallLeft = true;
+                isTouchingWall = true;
                 return;
             }
         }
-        isTouchingWallLeft = false;
-        for (int i = 0; i < wallCheckRight.Length; i++)
-        {
-            if (Physics2D.OverlapCircle(wallCheckRight[i].position, wallCheckRadius, wallLayer))
-            {
-                isTouchingWallRight = true;
-                return;
-            }
-        }
-        isTouchingWallRight = false;
+        isTouchingWall = false;
     }
     
     private void OnDrawGizmosSelected()
@@ -80,27 +69,15 @@ public class PlayerSensor : MonoBehaviour
             }
                 
         }
-
-        Gizmos.color = Color.red;
-        if (wallCheckLeft != null)
-        {
-            foreach (var point in wallCheckLeft)
-            {
-                if(!showWallGizmos) continue;
-                Gizmos.DrawWireSphere(point.position, wallCheckRadius);
-            }
-                
-        }
-
         Gizmos.color = Color.blue;
-        if (wallCheckRight != null)
+        if (wallCheck != null)
         {
-            foreach (var point in wallCheckRight)
+            foreach (var point in wallCheck)
             {
                 if(!showWallGizmos) continue;
                 Gizmos.DrawWireSphere(point.position, wallCheckRadius);
             }
                 
-        }
     }
+}
 }

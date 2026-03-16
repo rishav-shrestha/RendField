@@ -9,12 +9,13 @@ public class PlayerWalkState : PlayerState
         public override void Enter()
         {
        _player.animationController.Walk();
+        Debug.Log("Walk");
         }
 
         public override void Update()
         {
-            Debug.Log("Walk");
-            if (_player.input.HorizontalInput == 0)
+            
+            if (_player.input.HorizontalInput == 0 || _player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
             }

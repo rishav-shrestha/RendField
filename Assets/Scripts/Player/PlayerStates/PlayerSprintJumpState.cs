@@ -13,16 +13,17 @@ public class PlayerSprintJumpState : PlayerState
                 _player.controller.Jump(); 
             }
             _player.animationController.SprintJump();
+            Debug.Log("SprintJump");
         }
 
         public override void Update()
         {
-            Debug.Log("SprintJump");
-            if (_player.sensor.isGrounded)
+           
+            if (_player.sensor.isGrounded && _player.controller.Rb.linearVelocity.y < 0)
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
             }
-            if (!_player.input.SprintPressed||_player.input.HorizontalInput == 0)
+            if (!_player.input.SprintPressed||_player.input.HorizontalInput == 0||_player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerJumpState(_player));
             }

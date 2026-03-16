@@ -9,12 +9,12 @@ public class PlayerSprintState : PlayerState
         public override void Enter()
         {
         _player.animationController.Sprint();
+        Debug.Log("Sprint");
         }
 
         public override void Update()
         {
-            Debug.Log("Sprint");
-            if (_player.input.HorizontalInput == 0)
+            if (_player.input.HorizontalInput == 0 || _player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
             }
