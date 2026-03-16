@@ -20,11 +20,6 @@ public class PlayerWallJumpState : PlayerState
             {
                 _player.stateMachine.ChangeState(new PlayerFallState(_player));  
             }
-            if(_player.input.SprintPressed && _player.input.HorizontalInput != 0 
-                                           && !_player.sensor.isTouchingWall)
-            {
-                _player.stateMachine.ChangeState(new PlayerSprintJumpState(_player));
-            }
            
         }
         
