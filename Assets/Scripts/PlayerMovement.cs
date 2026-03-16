@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class PlayerMovement : MonoBehaviour
 {   
     /*<--------Movement Variables-------->*/
@@ -375,4 +377,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerLowerBody.GetComponent<Animator>().SetBool(variable, value); 
     }
+
+  
 }
+
