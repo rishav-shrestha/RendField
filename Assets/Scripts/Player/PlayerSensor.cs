@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerSensor : MonoBehaviour
 {
@@ -18,14 +19,16 @@ public class PlayerSensor : MonoBehaviour
     public bool showGizmos;
     public bool showWallGizmos;
     public bool showGroundGizmos;
-    
-    public bool IsGrounded { get; private set; }
-    public bool IsTouchingWallLeft { get; private set; }
-    public bool IsTouchingWallRight { get; private set; }
+
+    public bool isGrounded;
+    public bool isTouchingWallLeft;
+    public bool isTouchingWallRight;
 
     
     void Update()
     {
+        UpdateGrounded();
+        UpdateWallChecks();
     }
 
     private void UpdateGrounded()
@@ -34,11 +37,11 @@ public class PlayerSensor : MonoBehaviour
         {
             if(Physics2D.OverlapCircle(groundCheck[i].position, groundCheckRadius, groundLayer))
             {
-                IsGrounded = true;
+                isGrounded = true;
                 return;
             }
         }
-        IsGrounded = false;
+        isGrounded = false;
     }
 
     private void UpdateWallChecks()
@@ -47,19 +50,57 @@ public class PlayerSensor : MonoBehaviour
         {
             if(Physics2D.OverlapCircle(wallCheckLeft[i].position, wallCheckRadius, wallLayer))
             {
-                IsTouchingWallLeft = true;
+                isTouchingWallLeft = true;
                 return;
             }
         }
-        IsTouchingWallLeft = false;
+        isTouchingWallLeft = false;
         for (int i = 0; i < wallCheckRight.Length; i++)
         {
             if (Physics2D.OverlapCircle(wallCheckRight[i].position, wallCheckRadius, wallLayer))
             {
-                IsTouchingWallRight = true;
+                isTouchingWallRight = true;
                 return;
             }
         }
-        IsTouchingWallRight = false;
+        isTouchingWallRight = false;
+    }
+    
+    private void OnDrawGizmosSelected()
+    {
+        if (!showGizmos) return;
+
+        Gizmos.color = Color.yellow;
+        if (groundCheck != null)
+        {
+            foreach (var point in groundCheck)
+            {
+                if(!showGroundGizmos) continue;
+                    Gizmos.DrawWireSphere(point.position, groundCheckRadius);  
+            }
+                
+        }
+
+        Gizmos.color = Color.red;
+        if (wallCheckLeft != null)
+        {
+            foreach (var point in wallCheckLeft)
+            {
+                if(!showWallGizmos) continue;
+                Gizmos.DrawWireSphere(point.position, wallCheckRadius);
+            }
+                
+        }
+
+        Gizmos.color = Color.blue;
+        if (wallCheckRight != null)
+        {
+            foreach (var point in wallCheckRight)
+            {
+                if(!showWallGizmos) continue;
+                Gizmos.DrawWireSphere(point.position, wallCheckRadius);
+            }
+                
+        }
     }
 }

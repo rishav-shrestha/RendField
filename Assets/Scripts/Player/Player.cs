@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         input = GetComponent<PlayerInput>();
         sensor = GetComponent<PlayerSensor>();
         stateMachine = GetComponent<PlayerStateMachine>();
+        stateMachine.Initialize(new PlayerIdleState(this));
     }
     void Update()
     {

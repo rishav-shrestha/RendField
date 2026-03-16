@@ -8,23 +8,30 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void Idle()
     {
-        Set("walking", false);
-        Set("running", false);
-        Set("jump", false);
+        Set("idle");
     }
     public void Walk()
     {
-        Set("walking", true);
+        Set("walk");
     }
-    public void Run()
+    public void Sprint()
     {
-        Set("running", true);
+        Set("sprint");
     }
     public void Jump()
     {
         Set("jump");
     }
 
+    public void Fall()
+    {
+        Set("fall");
+    }
+
+    public void SprintJump()
+    {
+        Set("sprint_jump");
+    }
     public void Set(string param)
     {
         upperBody.SetTrigger(param);
