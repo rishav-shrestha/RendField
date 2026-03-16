@@ -28,13 +28,9 @@ public class PlayerInput : MonoBehaviour
             Flip();
     }
 
-    void Flip()
+    public void Flip()
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         LookingRight = !LookingRight;
-    }
-    public void  ResetJump()
-    {
-        JumpPressed = false;
     }
 }

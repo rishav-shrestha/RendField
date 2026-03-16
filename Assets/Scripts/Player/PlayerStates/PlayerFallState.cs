@@ -19,9 +19,14 @@ public class PlayerFallState : PlayerState
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
             }
+
+            if (_player.sensor.isTouchingWall)
+            {
+                _player.stateMachine.ChangeState(new PlayerWallSlideState(_player));
+            }
             if (!_player.sensor.isTouchingWall)
             {
-                _player.controller.Move(_player.input.HorizontalInput,false);  
+                _player.controller.FallMove(_player.input.HorizontalInput);  
             }
         }
         

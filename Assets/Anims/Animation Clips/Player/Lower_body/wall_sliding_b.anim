@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: wall_dragging_t
+  m_Name: wall_sliding_b
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -760629171949683881, guid: 52b19aacb06e67547ad335267d90b4f8, type: 3}
+      value: {fileID: -2994145689595090143, guid: 2aed618ca42351a459119d7ded948c1a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -760629171949683881, guid: 52b19aacb06e67547ad335267d90b4f8, type: 3}
+    - {fileID: -2994145689595090143, guid: 2aed618ca42351a459119d7ded948c1a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

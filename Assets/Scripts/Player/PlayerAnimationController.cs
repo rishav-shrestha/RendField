@@ -32,6 +32,10 @@ public class PlayerAnimationController : MonoBehaviour
     {
         Set("sprint_jump");
     }
+    public void WallSlide()
+    {
+        Set("wall_slide");
+    }
     public void Set(string param)
     {
         upperBody.SetTrigger(param);
