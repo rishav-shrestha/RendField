@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public PlayerInput input;
     public PlayerSensor sensor;
     public PlayerStateMachine stateMachine;
-    
+    public string currentState;
     
 
     void Awake()
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         if (stateMachine.currentState != null)
         {
             stateMachine.Update(); 
+            currentState = stateMachine.currentState.GetType().Name;
         }
     }
     void FixedUpdate()

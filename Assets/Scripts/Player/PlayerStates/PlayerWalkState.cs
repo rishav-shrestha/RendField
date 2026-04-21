@@ -18,18 +18,22 @@ public class PlayerWalkState : PlayerState
             if (_player.input.HorizontalInput == 0 || _player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
+                return;
             }
             if(_player.input.SprintPressed)
             {
                 _player.stateMachine.ChangeState(new PlayerSprintState(_player));
+                return;
             }
             if (_player.input.JumpPressed)
             {
                 _player.stateMachine.ChangeState(new PlayerJumpState(_player));
+                return;
             }
             if (!_player.sensor.isGrounded)
             {
                 _player.stateMachine.ChangeState(new PlayerFallState(_player));
+                return;
             }
             _player.controller.Move(_player.input.HorizontalInput,false);
         }

@@ -11,7 +11,7 @@ public class PlayerWallSlideState : PlayerState
             _player.controller.Rb.linearVelocity = Vector3.zero; 
             _player.controller.Rb.gravityScale = _player.controller.defaultGravityScale*_player.controller.wallslideMultiplier;
             _player.animationController.WallSlide();
-            Debug.Log("Fall");
+            Debug.Log("Wall Slide");
         }
 
         public override void Update()

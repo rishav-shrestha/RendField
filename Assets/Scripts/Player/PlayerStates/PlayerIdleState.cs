@@ -25,17 +25,20 @@ public class PlayerIdleState : PlayerState
                         return;
                     }
                     _player.stateMachine.ChangeState(new PlayerWalkState(_player));
+                    return;
                 }  
             }
             
             if (_player.input.JumpPressed)
             {
                 _player.stateMachine.ChangeState(new PlayerJumpState(_player));
+                return;
             }
 
             if (!_player.sensor.isGrounded)
             {
                 _player.stateMachine.ChangeState(new PlayerFallState(_player));
+                return;
             }
         }
         

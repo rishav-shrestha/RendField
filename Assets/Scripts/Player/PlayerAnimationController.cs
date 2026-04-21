@@ -8,38 +8,39 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void Idle()
     {
-        Set("idle");
+        Set("state", (int)AnimState.Idle);
     }
     public void Walk()
     {
-        Set("walk");
+        Set("state", (int)AnimState.Walk);
     }
     public void Sprint()
     {
-        Set("sprint");
+        Set("state", (int)AnimState.Sprint);
     }
     public void Jump()
     {
-        Set("jump");
+        Set("state", (int)AnimState.Jump);
     }
 
     public void Fall()
     {
-        Set("fall");
+        Set("state", (int)AnimState.Fall);
     }
 
     public void SprintJump()
     {
-        Set("sprint_jump");
+        Set("state", (int)AnimState.SprintJump);
     }
     public void WallSlide()
     {
-        Set("wall_slide");
+        Set("state", (int)AnimState.WallSlide);
     }
     public void Set(string param)
     {
         upperBody.SetTrigger(param);
         lowerBody.SetTrigger(param);
+        Debug.Log("Playing: " + param + "animation.");
     }
     public void Set(string param, float value)
     {
@@ -56,4 +57,15 @@ public class PlayerAnimationController : MonoBehaviour
         upperBody.SetBool(param, value);
         lowerBody.SetBool(param, value);
     }
+}
+
+public enum AnimState
+{
+    Idle,
+    Walk,
+    Sprint,
+    Jump,
+    Fall,
+    WallSlide,
+    SprintJump,
 }

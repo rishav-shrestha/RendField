@@ -18,6 +18,7 @@ public class PlayerWallJumpState : PlayerState
             if (_player.controller.Rb.linearVelocity.y < 0)
             {
                 _player.stateMachine.ChangeState(new PlayerFallState(_player));  
+                return;
             }
         }
         

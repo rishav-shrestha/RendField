@@ -21,11 +21,13 @@ public class PlayerJumpState : PlayerState
             if (_player.controller.Rb.linearVelocity.y < 0)
             {
                     _player.stateMachine.ChangeState(new PlayerFallState(_player));  
+                    return;
             }
             if(_player.input.SprintPressed && _player.input.HorizontalInput != 0 
                                            && !_player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerSprintJumpState(_player));
+                return;
             }
 
             if (!_player.sensor.isTouchingWall)

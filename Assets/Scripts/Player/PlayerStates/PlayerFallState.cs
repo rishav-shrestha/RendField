@@ -18,15 +18,18 @@ public class PlayerFallState : PlayerState
             if (_player.sensor.isGrounded)
             {
                 _player.stateMachine.ChangeState(new PlayerIdleState(_player));
+                return;
             }
 
             if (_player.sensor.isTouchingWall)
             {
                 _player.stateMachine.ChangeState(new PlayerWallSlideState(_player));
+                return;
             }
             if (!_player.sensor.isTouchingWall)
             {
                 _player.controller.FallMove(_player.input.HorizontalInput);  
+                return;
             }
         }
         
